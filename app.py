@@ -22,26 +22,7 @@ def index():
             
         } for book in books]
     return render_template('home.html',results=results)
-"""
-@app.route('/add',methods=['GET','POST'])
-def add():
-    form = AddForm()
 
-    if form.validate_on_submit():
-        name = form.name.data
-        auther = form.auther.data
-        price = form.price.data
-        image = form.image.data
-
-        book_data = Book(name,auther,price,image)
-        db.session.add(book_data)
-        db.session.commit()
-
-        return redirect(url_for('index'))
-
-    return render_template('add.html',form=form)
-
-"""
 
 @app.route('/add',methods=['GET','POST'])
 def add():
