@@ -4,13 +4,16 @@
 <div class="container">
 <h1>Add New book to the List</h1>
 <div>
-    <form method="POST">
-        {{form.hidden_tag()}}
-        {{form.name.label}}{{form.name()}}<br>
-        {{form.auther.label}}{{form.auther()}}<br>
-        {{form.price.label}}{{form.price()}}<br>
-        {{form.image.label}}{{form.image()}}<br>
-        {{form.submit()}}
+    <form action="/add" method="POST">
+        <label for="name">Title of the Book : </label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="auther">Auther of the Book : </label><br>
+        <input type="text" id="auther" name="auther"><br>
+        <label for="price">Price of the Book : </label><br>
+        <input type="text" id="price" name="price"><br>
+        <label for="image">Image address of Book : </label><br>
+        <input type="text" id="image" name="image"><br>
+        <button type="submit" value="add">add</button>
         
     </form>
 </div>
