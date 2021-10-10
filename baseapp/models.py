@@ -1,6 +1,8 @@
-from baseapp import db
+from baseapp import db,login_manager
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
+
+
 
 class Book(db.Model):
     __tablename__ = 'books'
@@ -17,6 +19,10 @@ class Book(db.Model):
         self.auther = auther
         self.price = price
         self.image = image
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 class User(db.Model,UserMixin):
 

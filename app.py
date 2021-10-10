@@ -22,6 +22,19 @@ def index():
         } for book in books]
     return render_template('first.html',results=results)
 
+@app.route('/home')
+def home():
+    books = Book.query.all()
+    results = [
+        {
+            "name": book.name,
+            "auther": book.auther,
+            "price": book.price,
+            "image":book.image
+            
+        } for book in books]
+    return render_template('home.html',results=results)
+
 
 @app.route('/add',methods=['GET','POST'])
 def add():
@@ -103,7 +116,7 @@ def userlogin():
             next = request.args.get('next')
 
             if next == None or not next[0] == '/':
-                next = url_for('index')
+                next = url_for('home')
             return redirect(next)
     elif request.method == 'GET':
         return render_template('login.html')
@@ -122,7 +135,7 @@ def register():
         db.session.commit()
         flash('Successfully Registered!')
 
-        return redirect(url_for('login'))
+        return redirect(url_for('userlogin'))
     elif request.method == 'GET':
 
         return render_template('register.html')
