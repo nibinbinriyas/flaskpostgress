@@ -1,8 +1,8 @@
 
 from flask import  render_template,redirect,url_for,request,flash
-from baseapp.models import Book
+from baseapp.models import Book,User
 from baseapp import app,db
-
+from flask_login.utils import login_required, login_user, logout_user
 
 
 
@@ -90,12 +90,12 @@ def logout():
 @app.route('/login',methods=['GET','POST'])
 def userlogin():
     
-    form = LoginForm()
 
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+    if request.method == 'POST':
+        d = request.form.to_dict()
+        user = User.query.filter_by(email=d['email']).first()
 
-        if user.check_password(form.password.data) and user is not None:
+        if user.check_password(d['password']) and user is not None:
             
             login_user(user)
             flash('Logged in successfully')
@@ -105,26 +105,27 @@ def userlogin():
             if next == None or not next[0] == '/':
                 next = url_for('index')
             return redirect(next)
-
-    return render_template('login.html',form=form)
+    elif request.method == 'GET':
+        return render_template('login.html')
 
 @app.route('/register',methods=['GET','POST'])
 def register():
 
-    form = RegistrationForm()
 
-    if form.validate_on_submit():
-        user = User(email=form.email.data,
-                    username=form.username.data,
-                    password=form.password.data)
+    if request.method == 'POST':
+        d = request.form.to_dict()
+        user = User(email=d['email'],
+                    username=d['username'],
+                    password=d['password'])
         
         db.session.add(user)
         db.session.commit()
         flash('Successfully Registered!')
 
         return redirect(url_for('login'))
-    
-    return render_template('register.html',form=form)
+    elif request.method == 'GET':
+
+        return render_template('register.html')
 
 
 
