@@ -1,10 +1,19 @@
 
 from flask import  render_template,redirect,url_for,request,flash
 from baseapp.models import Book,User
-from baseapp import app,db
+from baseapp import app,db,os
 from flask_login.utils import login_required, login_user, logout_user
 
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 
+from flask_dance.contrib.google import make_google_blueprint,google
+
+
+blueprint = make_google_blueprint(client_id='590700780001-7st6u7kp3dlrh65i2s088ctie7eh3se3.apps.googleusercontent.com',
+client_secret='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',
+                                    offline=True,scope=['profile','email'])
+app.register_blueprint(blueprint,url_prefix='/login')
 
 
 
@@ -140,6 +149,15 @@ def register():
 
         return render_template('register.html')
 
+
+@app.route('/login/google')
+def login():
+    if not google.authorized :
+        return render_template(url_for('google.login'))
+    resp = google.get('/oauth2/v2/userinfo')
+    assert resp.ok, resp.text
+    
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
