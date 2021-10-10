@@ -57,7 +57,7 @@ def add():
         new_book = Book(name, auther, price, image)
         db.session.add(new_book)
         db.session.commit()
-        return {"message": f"car {new_book.name} has been created successfully."}
+        return redirect(url_for('home'))
 
     
     elif request.method == 'GET':
@@ -79,7 +79,7 @@ def delete():
         book = Book.query.get(id)
         db.session.delete(book)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
 
     elif  request.method == 'GET':
 
