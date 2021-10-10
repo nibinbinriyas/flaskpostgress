@@ -1,0 +1,52 @@
+{% extends "firstBasic.html" %}
+
+{% block content %}
+<style>
+  
+</style>
+<div class="container">
+    <h1>Welcome to the Books Galary</h1>
+    <h1>first.html</h1>
+    </div>
+ <div class="container">   <h2>Available Books</h2> </div>
+ <div class="container">
+  <div class="container">
+    <ul>
+      
+      <div class="card-deck">
+        {% for book in results %}
+          
+       
+          
+
+            <div class="card">
+              <img src="{{book.image}}" class="card-img-top" alt="goodreads" width=100" height="300">
+              <div class="card-body">
+                <h5 class="card-title">{{book.name}}</h5>
+                <p class="card-text">This book is written by famous Auther {{book.auther}}.</p>
+               
+              </div>
+      
+            </div>
+           
+
+          
+    
+<!-- 
+            <tr>
+                <td>{{book.name}}</td>
+
+                <td>{{book.auther}}</td><br>
+            </tr>
+         -->
+        
+           
+        {% endfor %}
+      </div>
+    </ul>
+</div>
+
+</div>
+
+
+{% endblock %}

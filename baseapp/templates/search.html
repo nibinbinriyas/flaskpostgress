@@ -1,0 +1,17 @@
+{% extends "basic.html" %}
+
+{% block content %}
+<div class="container">
+<h1>Select an Auther</h1>
+<div>
+    <form action="/search" method="POST">
+        <label for="auther">Enter the Auther Name : </label><br>
+        <input type="text" id="auther" name="auther"><br>
+        
+        <button type="submit">Search</button>
+        
+    </form>
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "basic.html" %}
+
+{% block content %}
+<div class="container">
+<h1>Buy the List</h1>
+<div>
+    <form action="/delete" method="POST">
+        <label for="id">Id of the Book : </label><br>
+        <input type="text" id="id" name="id"><br>
+        
+        <button type="submit" value="add">Buy</button>
+        
+    </form>
+</div>
+
+</div>
+{% endblock %}

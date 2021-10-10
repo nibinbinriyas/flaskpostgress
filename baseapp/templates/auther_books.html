@@ -1,0 +1,29 @@
+{% extends "basic.html" %}
+
+{% block content %}
+
+<div class="container">
+    <ul>
+        <h1>Selected Auther's Available Books</h1>
+        {% for book in book_data %}
+        
+        {% if auther == book.auther %}
+       
+            <div class="card" style="width: 18rem;">
+                <img src="{{book.image}}" class="card-img-top" alt="readgood" height="250">
+                <div class="card-body">
+                    <h5 class="card-title">{{book.name}}</h5>
+                    <p class="card-text">is a famous book by {{book.auther}}</p>
+                </div>
+                <br>
+            </div>
+  
+
+
+
+
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -10,3 +10,7 @@ class AddForm(FlaskForm):
     price = StringField("Price of the Book ")
     image = StringField("url for image ")
     submit = SubmitField("Add Book")
+
+class DelForm(FlaskForm):
+    id = IntegerField("Id of the Book    ")
+    submit = SubmitField("Buy")
