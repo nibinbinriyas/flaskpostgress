@@ -65,8 +65,6 @@ def add():
 
         return render_template("add.html")
 
-    else:
-        return {"error": "The request payload is not in JSON format"}
 
 
 @app.route('/delete',methods=['GET','POST'])
@@ -157,9 +155,9 @@ def login():
     resp = google.get('/oauth2/v2/userinfo')
     assert resp.ok, resp.text
     
-    return redirect(url_for('home'))
+    return render_template('home.html')
 
 
 if __name__ == '__main__':
-    
+
     app.run(debug=True)
